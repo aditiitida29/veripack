@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  veripack-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: veripack_app
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=doca-veripack-super-secret-key-2026-production
+      - DATABASE_URL=sqlite:////app/backend/veripack.db
+      - TESSERACT_CMD=tesseract
+    volumes:
+      - veripack_data:/app/uploads
+    restart: unless-stopped
+
+volumes:
+  veripack_data:
